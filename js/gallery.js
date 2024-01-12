@@ -65,10 +65,7 @@ const images = [
     },
   ];
   const gallary = document.querySelector("ul.gallery");
-  gallary.addEventListener("click", event => {
-    event.preventDefault();
-});  
-function createGallary() {
+  function createGallary() {
     const gallaryContainer = images.map(image => {
         return `<li class="gallery-item">
         <a class="gallery-link" href="${image.original}">
@@ -83,9 +80,26 @@ function createGallary() {
     })
     .join("\n");
     return gallaryContainer;
-}
-gallary.addEventListener("click", function (event) {
-    console.log(event.currentTarget);
-});        
+}      
 const gallaryContainer = createGallary();
 gallary.innerHTML = gallaryContainer;
+let instanceImage;
+  gallary.addEventListener("click", showOriginalImage);
+    function showOriginalImage(event) {
+    event.preventDefault();
+    const originalImage = event.target.dataset.source;
+    instanceImage = basicLightbox.create(`<img src="${originalImage}" width = "1112" height = "640">`);
+    instanceImage.show();
+document.addEventListener("keydown", onImageKeydown);
+}
+function closeOriginalImage() {
+  if (instanceImage.visible()) {
+    instanceImage.close();
+  document.removeEventListener("keydown", onImageKeydown);
+  }
+}
+function onImageKeydown(event) {
+    if (event.key && event.code === "Escape") {
+      closeOriginalImage();
+    }
+  }
