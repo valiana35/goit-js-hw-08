@@ -87,15 +87,17 @@ let instanceImage;
   gallary.addEventListener("click", showOriginalImage);
     function showOriginalImage(event) {
     event.preventDefault();
+    if (event.target.classList.contains("gallery-image")) {
     const originalImage = event.target.dataset.source;
     instanceImage = basicLightbox.create(`<img src="${originalImage}" width = "1112" height = "640">`);
     instanceImage.show();
 document.addEventListener("keydown", onImageKeydown);
+    }
 }
 function closeOriginalImage() {
   if (instanceImage.visible()) {
     instanceImage.close();
-  document.removeEventListener("keydown", onImageKeydown);
+    document.removeEventListener("keydown", onImageKeydown);
   }
 }
 function onImageKeydown(event) {

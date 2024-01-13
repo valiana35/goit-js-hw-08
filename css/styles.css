@@ -18,4 +18,8 @@ ul {
   width: 360px;
   height: 200px;
   flex-shrink: 0;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1), 500ms ease;
+}
+.gallery-image:hover {
+  transform: scale(1.1);
 }
