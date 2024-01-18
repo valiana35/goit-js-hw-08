@@ -83,30 +83,25 @@ const images = [
 }
 createGallary();      
 gallary.addEventListener("click", showOriginalImage);
+let modalImage;
 function showOriginalImage(event) {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') return;
-    const liElem = event.target.closest('li');
-    const source = liElem.dataset.source;
-    const image = images.find(elem => elem.source === source);
-    showModal(image);
+    const imageOriginal = event.target.dataset.source;
+    modalImage = basicLightbox.create(`<img src="${imageOriginal}" width="1400" height="900"/>`,
+    {
+      onShow: instance => {
+        document.addEventListener('keydown', onImageKeydown);
+      },
+      onClose: instance => {
+        document.removeEventListener('keydown', onImageKeydown);
+      },
+    },
+    )
+    modalImage.show();
 }
-function showModal(image) {
-  const { original, description } = image;
-  const modalImage = basicLightbox.create(`<img src="${original}" alt=${description}>`,
-  {
-    onShow: instance => {
-      document.addEventListener('keydown', onImageKeydown);
-    },
-    onClose: instance => {
-      document.removeEventListener('keydown', onImageKeydown);
-    },
-  }
-  );
-modalImage.show();
 function onImageKeydown(event) {
     if (event.code === "Escape") {
       modalImage.close();
     }
   }
-}
