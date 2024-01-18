@@ -97,7 +97,7 @@ function showOriginalImage(event) {
         document.removeEventListener('keydown', onImageKeydown);
       },
     },
-    )
+    );
     modalImage.show();
 }
 function onImageKeydown(event) {
