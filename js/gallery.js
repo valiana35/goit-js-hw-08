@@ -88,7 +88,7 @@ function showOriginalImage(event) {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') return;
     const imageOriginal = event.target.dataset.source;
-    modalImage = basicLightbox.create(`<img src="${imageOriginal}" width="1400" height="900"/>`,
+    modalImage = basicLightbox.create(`<img src="${imageOriginal}" width="1112" height="640"/>`,
     {
       onShow: instance => {
         document.addEventListener('keydown', onImageKeydown);
