@@ -88,12 +88,15 @@ function showOriginalImage(event) {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') return;
     const imageOriginal = event.target.dataset.source;
-    modalImage = basicLightbox.create(`<img src="${imageOriginal}" width="1112" height="640"/>`,
+    modalImage = basicLightbox.create(
+    `<div class="modal">
+    <img src="${imageOriginal}" width="1112" height="640"/>
+    </div>`,
     {
-      onShow: instance => {
+      onShow: () => {
         document.addEventListener('keydown', onImageKeydown);
       },
-      onClose: instance => {
+      onClose: () => {
         document.removeEventListener('keydown', onImageKeydown);
       },
     },
